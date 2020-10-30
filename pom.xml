@@ -67,7 +67,6 @@
     <resources.plugin>3.1.0</resources.plugin>
     <scm.plugin>1.9.2</scm.plugin>
     <scm-provider-git.plugin>1.9.4</scm-provider-git.plugin>
-    <scm-provider-svn.plugin>2.1.2</scm-provider-svn.plugin>
     <site.plugin>3.8.2</site.plugin>
     <sonar.plugin>3.7.0.1746</sonar.plugin>
     <surefire.plugin>3.0.0-M3</surefire.plugin>
@@ -166,12 +165,6 @@
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-provider-gitexe</artifactId>
             <version>${scm-provider-git.plugin}</version>
-          </dependency>
-          <!-- Dependency for SVN -->
-          <dependency>
-            <groupId>com.google.code.maven-scm-provider-svnjava</groupId>
-            <artifactId>maven-scm-provider-svnjava</artifactId>
-            <version>${scm-provider-svn.plugin}</version>
           </dependency>
         </dependencies>
       </plugin>
