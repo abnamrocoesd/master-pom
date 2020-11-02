@@ -36,10 +36,10 @@
       <email>arani.nayak@nl.abnamro.com</email>
     </developer>
   </developers>
+
   <scm>
-    <connection>https://github.com/abnamrocoesd/master-pom</connection>
-    <developerConnection>https://github.com/abnamrocoesd/master-pom
-    </developerConnection>
+    <connection>scm:git:git@github.com:abnamrocoesd/master-pom.git</connection>
+    <developerConnection>scm:git:git@github.com:abnamrocoesd/master-pom.git</developerConnection>
     <url>https://github.com/abnamrocoesd/master-pom</url>
   </scm>
 
@@ -66,7 +66,7 @@
     <release.plugin>2.5.3</release.plugin>
     <resources.plugin>3.1.0</resources.plugin>
     <scm.plugin>1.9.2</scm.plugin>
-    <scm-provider-git.plugin>1.9.4</scm-provider-git.plugin>
+    <scm-provider-git.plugin>1.11.2</scm-provider-git.plugin>
     <site.plugin>3.8.2</site.plugin>
     <sonar.plugin>3.7.0.1746</sonar.plugin>
     <surefire.plugin>3.0.0-M3</surefire.plugin>
@@ -156,11 +156,18 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>${release.plugin}</version>
         <configuration>
-          <tagNameFormat>@{project.version}</tagNameFormat>
-
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <useReleaseProfile>false</useReleaseProfile>
+          <releaseProfiles>release</releaseProfiles>
+          <goals>deploy</goals>
         </configuration>
         <dependencies>
           <!-- Dependency for GIT -->
+          <dependency>
+            <groupId>org.apache.maven.scm</groupId>
+            <artifactId>maven-scm-api</artifactId>
+            <version>1.11.2</version>
+          </dependency>
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-provider-gitexe</artifactId>
@@ -239,51 +246,6 @@
             <phase>verify</phase>
             <goals>
               <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Plugins mandatory for sharing artifacts to maven-central -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${javadoc.plugin}</version>
-        <configuration>
-          <detectJavaApiLink>false</detectJavaApiLink>
-        </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
             </goals>
           </execution>
         </executions>
@@ -407,6 +369,57 @@
           </plugin>
         </plugins>
       </reporting>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <!-- Plugins mandatory for sharing artifacts to maven-central -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${javadoc.plugin}</version>
+            <configuration>
+              <detectJavaApiLink>false</detectJavaApiLink>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
