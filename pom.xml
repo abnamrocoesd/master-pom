@@ -1,10 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.abnamro.coesd.public</groupId>
   <artifactId>master-pom</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
   <name>ABNAMRO CoE Software Development Master POM</name>
   <description>Master parent POM for all Java related development which are intended to be shared
@@ -41,6 +39,7 @@
     <connection>scm:git:git@github.com:abnamrocoesd/master-pom.git</connection>
     <developerConnection>scm:git:git@github.com:abnamrocoesd/master-pom.git</developerConnection>
     <url>https://github.com/abnamrocoesd/master-pom</url>
+    <tag>master-pom-1.0.0</tag>
   </scm>
 
   <properties>
@@ -408,15 +407,9 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
+            <configuration>
+              <useAgent>true</useAgent>
+            </configuration>
           </plugin>
         </plugins>
       </build>
