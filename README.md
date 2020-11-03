@@ -9,6 +9,6 @@ It also enforces some quality control which is as per ABN coding standards.
 <parent>
     <groupId>com.abnamro.coesd.public</groupId>
     <artifactId>master-pom</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </parent>
 ```
